@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from 'react';
+import Header from "./Header/Header";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import ProductCatalog from "./ProductCatalog/ProductCatalog";
+import Cart from "./Cart/Cart";
+import SpecificProductCard from "./SpecificProductCard/SpecificProductCard";
+import products from "./ProductCatalog/products";
+import NewCollection from "./NewCollection/NewCollection"; // импортируем массив products
+import PersonalAccount from "./PersonalAccount/PersonalAccount";
+export const CartContext = createContext();
+const App = () => {
+    const [items, setItems] = useState([]);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <CartContext.Provider value={{ items, setItems }}>
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route path="/catalog" element={
+                        <div>
+                            <NewCollection />
+                            <ProductCatalog />
+                        </div>
+                    }/>
+                    <Route path="/account" element={<PersonalAccount/>} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/card/:index" element={<SpecificProductCard products={products} />} />
+                    <Route path="/" element={<Navigate to="/catalog" />} />
+                </Routes>
+            </BrowserRouter>
+        </CartContext.Provider>
+    );
 }
 
 export default App;

@@ -1,5 +1,6 @@
-const products = [
+export const products = [
     {
+        id: 0,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM08YOZ_18340081_1_v2.jpg",
         price: 5090,
         name: "Худи",
@@ -16,6 +17,7 @@ const products = [
         ],
     },
     {
+        id: 1,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM003D0_22422114_1_v1_2x.jpg",
         price: 1250,
         name: "Толстовка",
@@ -32,6 +34,7 @@ const products = [
         ],
     },
     {
+        id: 2,
         image: "https://a.lmcdn.ru/img600x866/R/T/RTLADJ415901_23034396_1_v1_2x.jpg",
         price: 8300,
         name: "Футболка",
@@ -48,6 +51,7 @@ const products = [
         ],
     },
     {
+        id: 3,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM004VU_22605510_1_v1_2x.jpg",
         price: 1390,
         name: "Поло",
@@ -64,6 +68,7 @@ const products = [
         ],
     },
     {
+        id: 4,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM00J2F_23094763_1_v1.jpeg",
         price: 4549,
         name: "Ветровка",
@@ -80,6 +85,7 @@ const products = [
         ],
     },
     {
+        id: 5,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM00L8P_23227400_1_v1_2x.jpeg",
         price: 2299,
         name: "Футболка",
@@ -96,6 +102,7 @@ const products = [
         ],
     },
     {
+        id: 6,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XU0DI15_21653051_1_v1_2x.jpg",
         price: 4990,
         name: "Свитшот",
@@ -112,6 +119,7 @@ const products = [
         ],
     },
     {
+        id: 7,
         image: "https://a.lmcdn.ru/img600x866/R/T/RTLADG029001_22937288_1_v1_2x.jpg",
         price: 2970,
         name: "Футболка",
@@ -128,6 +136,7 @@ const products = [
         ],
     },
     {
+        id: 8,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM00636_22605742_1_v1_2x.jpg",
         price: 4990,
         name: "Брюки спортивные",
@@ -135,7 +144,7 @@ const products = [
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
-            'Параметры модели . 100-75-94',
+            'Параметры модели . 120-75-94',
             'Рост модели на фото .  181 см',
             'Длина (см) . 75 см',
             'Длина рукава (см) . 27 см',
@@ -144,6 +153,7 @@ const products = [
         ],
     },
     {
+        id: 9,
         image: "https://a.lmcdn.ru/img600x866/M/P/MP002XM00CER_22810375_1_v1_2x.jpeg",
         price: 3299,
         name: "Шорты джинсовые",

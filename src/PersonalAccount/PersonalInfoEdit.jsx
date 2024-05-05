@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
-import {EditTitle, EditForm, EditInput, EditButton, EditLabel} from "./styledPersonalAccount.ts";
-import notification from "antd/es/notification";
+import { EditTitle, EditForm, EditInput, EditButton, EditLabel } from './styledPersonalAccount.ts';
+import notification from 'antd/es/notification';
 
-const PersonalInfoEdit = ({ onSave = () => {} }) => {
-    const [form, setForm] = useState(() => {
-        const savedForm = localStorage.getItem('personalInfoEdit');
-        return savedForm? JSON.parse(savedForm) : {
-            name: '',
-            surname: '',
-            email: '',
-            phone: '',
-            birthday: '',
-            city: '',
-        };
-    });
+const PersonalInfoEdit = ({ personalInfo, onSave }) => {
+    const [form, setForm] = useState(personalInfo);
 
     const handleInputChange = (e) => {
         setForm({
@@ -24,13 +14,13 @@ const PersonalInfoEdit = ({ onSave = () => {} }) => {
 
     const handleSaveClick = (e) => {
         e.preventDefault();
-        localStorage.setItem('personalInfoEdit', JSON.stringify(form));
         onSave(form);
         notification.success({
             message: 'Данные сохранены',
             description: `Добро пожаловать "${form.name + ' ' + form.surname}"!`,
             placement: 'topLeft',
         });
+        localStorage.setItem('personalInfo', JSON.stringify(form));
     };
 
     return (

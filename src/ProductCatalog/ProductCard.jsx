@@ -1,32 +1,33 @@
-import React, {useContext, useState} from 'react';
-import { Button } from 'antd';
-import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ProductCardContainer, ProductImage, ProductPrice, ProductName, ProductBrand, BuyButton } from './styledProductCard.ts';
+import { useContext } from 'react';
 import { CartContext } from '../App';
-import notification from 'antd/es/notification';
-import {Link} from "react-router-dom";
+import { Button } from "antd";
+import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';
 
-const ProductCard = ({ image, price, name, brand, linkTo }) => {
+const ProductCard = ({ product }) => {
+    const { id, image, price, name, brand } = product;
     const { setItems } = useContext(CartContext);
-    const [isFavorite, setIsFavorite] = useState(false); // new state to track favorited status
+    const [isFavorite, setIsFavorite] = useState(false);
+
     const addToCart = () => {
-        setItems((prevItems) => [...prevItems, { image, price, name, brand }]);
-        notification.success({
-            message: 'Товар добавлен в корзину',
-            description: `Товар "${name + ' ' + brand}" был добавлен в корзину`,
-            placement: 'topLeft',
-        });
+        setItems((prevItems) => [...prevItems, { id, image, price, name, brand }]);
     };
 
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
     };
 
+    const productLink = `/card/${id}`;
+
     return (
         <ProductCardContainer>
-            <Link to={linkTo}>
-                <ProductImage src={image} alt={name} />
-            </Link>
+            {image && (
+                <Link to={productLink}>
+                    <ProductImage src={image} alt={name} />
+                </Link>
+            )}
             <div style={{ position: 'relative', width: '100%' }}>
                 <Button
                     type="text"
@@ -42,9 +43,9 @@ const ProductCard = ({ image, price, name, brand, linkTo }) => {
                     )}
                 </Button>
             </div>
-            <ProductPrice>{price} руб.</ProductPrice>
-            <ProductName>{name}</ProductName>
-            <ProductBrand>{brand}</ProductBrand>
+            {price && <ProductPrice>{price} руб.</ProductPrice>}
+            {name && <ProductName>{name}</ProductName>}
+            {brand && <ProductBrand>{brand}</ProductBrand>}
             <BuyButton onClick={addToCart}>Купить</BuyButton>
         </ProductCardContainer>
     );

@@ -5,9 +5,11 @@ import ProductCatalog from "./ProductCatalog/ProductCatalog";
 import Cart from "./Cart/Cart";
 import SpecificProductCard from "./SpecificProductCard/SpecificProductCard";
 import products from "./ProductCatalog/products";
-import NewCollection from "./NewCollection/NewCollection"; // импортируем массив products
+import NewCollection from "./NewCollection/NewCollection";
 import PersonalAccount from "./PersonalAccount/PersonalAccount";
+
 export const CartContext = createContext();
+
 const App = () => {
     const [items, setItems] = useState([]);
 
@@ -19,17 +21,17 @@ const App = () => {
                     <Route path="/catalog" element={
                         <div>
                             <NewCollection />
-                            <ProductCatalog />
+                            <ProductCatalog products={products} />
                         </div>
                     }/>
-                    <Route path="/account" element={<PersonalAccount/>} />
+                    <Route path="/account" element={<PersonalAccount />} />
                     <Route path="/cart" element={<Cart />} />
-                    <Route path="/card/:index" element={<SpecificProductCard products={products} />} />
+                    <Route path="/card/:id" element={<SpecificProductCard products={products} />} />
                     <Route path="/" element={<Navigate to="/catalog" />} />
                 </Routes>
             </BrowserRouter>
         </CartContext.Provider>
     );
-}
+};
 
 export default App;

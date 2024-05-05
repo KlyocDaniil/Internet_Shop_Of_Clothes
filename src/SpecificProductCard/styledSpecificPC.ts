@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const MainWrap = styled.div`
   display: flex;
-  justify-content: center;
-  height: 1020px;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Wrapper = styled.div`
@@ -11,95 +11,140 @@ export const Wrapper = styled.div`
   flex-direction: row;
   width: 80%;
   margin: 30px 30px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Image = styled.img`
-  flex-basis: 40%;
-  max-width: 600px;
-  height: 85%;
-  margin-right: 20px;
+  width: 500px;
+  height: 600px;
+  object-fit: fill;
+  border-radius: 10px;
+  margin-right: 30px;
 `;
 
 export const Info = styled.div`
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding-left: 20px;
+  justify-content: space-between;
+  width: 50%;
+  margin-left: 30px;
+`;
+
+export const ProductDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const Price = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+export const TextCardMain = styled.div`
+  font-size: 18px;
+  margin-bottom: 10px;
 `;
 
 export const DescriptionList = styled.ul`
+  width: 100%;
   list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
-
 export const DescriptionListItem = styled.li`
-  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 5px;
+  border: 1px solid black;
+  padding: 5px;
+  width: 90%; /* adjust the width to your liking */
 `;
 
 export const DescriptionLabel = styled.span`
-  width: 30%;
-  text-align: left;
   font-weight: bold;
+  text-align: left;
 `;
 
 export const DescriptionValue = styled.span`
-  width: 70%;
   text-align: right;
-  font-weight: normal;
-  margin-right: 100px;
-  border: 1px solid black;
-  padding: 20px;
 `;
 
-export const DescriptionDots = styled.span`
-  flex-grow: 1;
-  text-align: center;
-  font-size: 12px;
-  color: #ccc;
-`;
 export const SizeSelect = styled.div`
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 `;
 
 export const Select = styled.select`
-  width: 80%;
-  padding: 10px;
   margin-left: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
+  padding: 5px;
   border-radius: 5px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
+  border: 1px solid #ccc;
 `;
 
 export const AddToCartButton = styled.button`
   padding: 10px 20px;
-  background-color: #565656;
-  width: 173px;
-  height: 40px;
-  color: #fff;
+  background-color: #333333;
+  color: white;
   border: none;
-  border-radius: 50px;
-  font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
   cursor: pointer;
 `;
 
-export const Price = styled.p`
-  font-size: 24px;
-  font-weight: bold;
+export const OtherProductsWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 0;
+  width: 90%; /* Увеличенная ширина */
 `;
 
-export const TextCardMain = styled.p`
+export const OtherProductsTitle = styled.div`
+  width: 100%;
+  padding: 10px;
+  background-color: #f2f2f2;
+  text-align: center;
   font-size: 20px;
-  //font-weight: bold;
+  font-weight: bold;
+  cursor: pointer;
 `;
 
+export const OtherProductCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+export const OtherProductImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+`;
+
+export const OtherProductInfo = styled.div`
+  padding: 10px;
+`;
+
+export const OtherProductPrice = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+export const OtherProductAddToCartButton = styled.button`
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+`;

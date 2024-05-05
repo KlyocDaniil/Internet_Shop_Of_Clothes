@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import ProductCard from './ProductCard';
-import {ProductCatalogContainer, ProductCatalogList, ProductCatalogTitle} from './styledProductCatalog.ts';
+import { ProductCatalogContainer, ProductCatalogList, ProductCatalogTitle } from './styledProductCatalog.ts';
 import { CartContext } from '../App';
 import products from "./products";
 
@@ -11,23 +11,19 @@ const ProductCatalog = () => {
         setItems((prevItems) => [...prevItems, product]);
     };
 
-    const productCards = products.map((product, index) => (
-        <ProductCard
-            key={index}
-            image={product.image}
-            price={product.price}
-            name={product.name}
-            brand={product.brand}
-            onBuyClick={addToCart}
-            linkTo={`/card/${index}`}
-        />
-    ));
-
     return (
         <ProductCatalogContainer>
             <ProductCatalogTitle> Каталог товаров </ProductCatalogTitle>
             <p>Количество товаров: {products.length}</p>
-            <ProductCatalogList>{productCards}</ProductCatalogList>
+            <ProductCatalogList>
+                {products.map((product) => (
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        onBuyClick={addToCart}
+                    />
+                ))}
+            </ProductCatalogList>
         </ProductCatalogContainer>
     );
 };

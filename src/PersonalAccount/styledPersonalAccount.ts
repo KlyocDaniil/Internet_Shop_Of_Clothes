@@ -17,7 +17,7 @@ export const MyProfile = styled.div `
   width: 1164px;
   height: 163px;
   flex-wrap: nowrap;
-  padding: 10px;
+  padding-bottom: 40px; // добавил padding, чтобы не накладывались
   border-bottom: 1px solid #DEDEDB;
 `
 
@@ -28,9 +28,10 @@ export const Personal = styled.div `
 `
 
 export const InfoColumn = styled.div `
-  flex-basis: calc(25% - 10px);
+  flex-basis: calc(23% - 10px); // уменьшил ширину, чтобы не накладывались
   margin: 20px 5px;
   display: flex;
+  width: 200px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -56,6 +57,12 @@ export const ColumnContent = styled.div `
 export const EditTitle = styled.h2 `
   font-weight: bold;
   margin-bottom: 10px;
+`
+export const PersonalInfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 `
 
 export const EditForm = styled.form `

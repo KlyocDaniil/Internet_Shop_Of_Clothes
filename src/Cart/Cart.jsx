@@ -76,7 +76,7 @@ const Cart = () => {
             setDiscount(discountAmount);
             notification.success({
                 message: 'Промокод применен',
-                description: `Активирован промокод ${promoCode} скидка в размере ${discount} рублей! Процент скидки: ${parseInt(promoCodeFound.slice(6))}%`,
+                description: `Активирован промокод ${promoCode}! Процент скидки: ${parseInt(promoCodeFound.slice(6))}%`,
                 placement: 'topLeft',
             });
         } else {

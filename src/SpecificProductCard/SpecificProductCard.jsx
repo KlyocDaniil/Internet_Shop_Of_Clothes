@@ -58,7 +58,8 @@ const SpecificProductCard = () => {
                 <Image src={currentProduct.image} alt={currentProduct.name} />
                 <Info>
                     <ProductDetails>
-                        <FavoriteButton onClick={() => toggleFavorite(favorites, setFavorites, currentProduct.id, currentProduct.image, currentProduct.price, currentProduct.name, currentProduct.brand, setIsFavorite, isFavorite)}>
+                        <FavoriteButton
+                            onClick={() => toggleFavorite(favorites, setFavorites, currentProduct.id, currentProduct.image, currentProduct.price, currentProduct.name, currentProduct.brand, setIsFavorite, isFavorite)}>
                             {isFavorite ? (
                                 <HeartTwoTone twoToneColor="#eb2f96" style={{ fontSize: '25px' }} />
                             ) : (

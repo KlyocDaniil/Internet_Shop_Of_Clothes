@@ -7,6 +7,7 @@ export const toggleFavorite = (favorites, setFavorites, id, image, price, name, 
     } else {
         setFavorites([...favorites, {id, image, price, name, brand}]);
     }
+    console.log(isFavorite)
     notification.success({
         message: 'Круто!',
         description: `"${name}  ${brand}" ${isFavorite ? 'удален из избранного' : 'добавлен в избранное' } `,

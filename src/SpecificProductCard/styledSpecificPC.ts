@@ -95,6 +95,14 @@ export const AddToCartButton = styled.button`
   cursor: pointer;
 `;
 
+export const FavoriteButton = styled.button`
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
 export const OtherProductsWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -105,12 +113,14 @@ export const OtherProductsWrap = styled.div`
 
 export const OtherProductsTitle = styled.div`
   width: 100%;
-  padding: 10px;
+  padding: 10px 5%;
   background-color: #f2f2f2;
   text-align: center;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const OtherProductCard = styled.div`

@@ -3,11 +3,12 @@ import { ConfigProvider, Space } from 'antd';
 import {HeartOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined} from '@ant-design/icons';
 import { StyledButtonHeader, StyledIconButton, StyledSpan } from './styledHeader.ts';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../App';
+import { AppStateContext } from '../App';
 
 const Header = () => {
     const navigate = useNavigate();
-    const { items } = useContext(CartContext);
+    const { items, favorites } = useContext(AppStateContext);
+
 
     const handleCartClick = () => {
         navigate('/cart');
@@ -19,6 +20,10 @@ const Header = () => {
 
     const handleAccountClick = () => {
         navigate('/account')
+    }
+
+    const handleFavoritesClick = () => {
+        navigate('/favorites')
     }
 
     return (
@@ -43,10 +48,19 @@ const Header = () => {
                 <Space>
                     <StyledIconButton > <SearchOutlined /> </StyledIconButton>
                     <StyledIconButton onClick={handleAccountClick}> <UserOutlined /> </StyledIconButton>
-                    <StyledIconButton > <HeartOutlined /> </StyledIconButton>
+                    <StyledIconButton onClick={handleFavoritesClick} >
+                        <HeartOutlined />
+                        {favorites.length > 0 &&
+                            <span style={{ marginLeft: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                                {favorites.length}
+                            </span>}
+                    </StyledIconButton>
                     <StyledIconButton onClick={handleCartClick} >
                         <ShoppingCartOutlined />
-                        {items.length > 0 && <span style={{ marginLeft: '5px', fontSize: '12px', fontWeight: 'bold' }}>{items.length}</span>}
+                        {items.length > 0 &&
+                            <span style={{ marginLeft: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                                {items.length}
+                            </span>}
                     </StyledIconButton>
                 </Space>
             </div>

@@ -4,17 +4,16 @@ export const StyledButtonHeader = styled.button`
   background-color: #1D1D1D;
   color: white;
   border: none;
-  font-size: 16px;
-  font-weight: bold;
   padding: 0 15px;
-  height: 40px;
-  margin-right: 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  font-size: 20px;
+  margin-right: 15px;
+  font-family: 'Montserrat', sans-serif;
 
   &:hover {
-    background-color: #333333;
+    background-color: #3333;
   }
 `;
 
@@ -44,6 +43,6 @@ export const StyledSpan = styled.span`
   margin-right: 15px;
 
   &:hover {
-    color: #333333;
+    color: lightgray;
   }
 `;

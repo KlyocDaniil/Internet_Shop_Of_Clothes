@@ -7,14 +7,15 @@ import SpecificProductCard from "./SpecificProductCard/SpecificProductCard";
 import products from "./ProductCatalog/products";
 import NewCollection from "./NewCollection/NewCollection";
 import PersonalAccount from "./PersonalAccount/PersonalAccount";
-
-export const CartContext = createContext();
+import Favorites from "./Favorites/Favorites";
+export const AppStateContext = createContext();
 
 const App = () => {
     const [items, setItems] = useState([]);
+    const [favorites, setFavorites] = useState([]);
 
     return (
-        <CartContext.Provider value={{ items, setItems }}>
+        <AppStateContext.Provider value={{ items, setItems, favorites, setFavorites }}>
             <BrowserRouter>
                 <Header />
                 <Routes>
@@ -28,9 +29,11 @@ const App = () => {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/card/:id" element={<SpecificProductCard products={products} />} />
                     <Route path="/" element={<Navigate to="/catalog" />} />
+                    <Route path="/favorites" element={<Favorites/>} />
                 </Routes>
+
             </BrowserRouter>
-        </CartContext.Provider>
+        </AppStateContext.Provider>
     );
 };
 

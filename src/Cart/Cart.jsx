@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { CartContext } from '../App';
+import { AppStateContext } from '../App';
 import {
     CartItem,
     CartItemImage,
@@ -20,14 +20,14 @@ import {
     ApplyPromoCodeButton,
     CheckoutButton,
     PromocodeInputButton,
-    PromoCodeInput,
+    PromoCodeInput, CentredNotification, CentredNotificationContainer, CentredNotificationWrapper,
 } from './styledCart.ts';
 import { ProductCatalogTitle } from "../ProductCatalog/styledProductCatalog.ts";
 import {DeleteOutlined} from "@ant-design/icons";
 import notification from "antd/es/notification";
 
 const Cart = () => {
-    const { items, setItems } = useContext(CartContext);
+    const { items, setItems } = useContext(AppStateContext);
 
     const promoCodes = ['SPRING20', 'FORYOU50', 'SANYOK70', 'NASTYA90'];
 
@@ -60,7 +60,14 @@ const Cart = () => {
     const itemsCount = selectedItems.filter(Boolean).length;
 
     if (!items.length) {
-        return <CartContainer>Корзина пуста</CartContainer>;
+        return (
+            <CartContainer>
+                <CentredNotificationWrapper>
+                    <CentredNotification>Корзина пуста</CentredNotification>
+                    <CentredNotification>Пора бы закупиться :)</CentredNotification>
+                </CentredNotificationWrapper>
+            </CartContainer>
+        )
     }
 
     const deliveryCost = 500;

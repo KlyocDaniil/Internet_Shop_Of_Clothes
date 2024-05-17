@@ -2,21 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductCardContainer, ProductImage, ProductPrice, ProductName, ProductBrand, BuyButton } from './styledProductCard.ts';
 import { useContext } from 'react';
-import { CartContext } from '../App';
 import { Button } from "antd";
 import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';
+import {AppStateContext} from "../App";
+import { toggleFavorite } from "../utils/favoriteFunctions";
 
 const ProductCard = ({ product }) => {
     const { id, image, price, name, brand } = product;
-    const { setItems } = useContext(CartContext);
-    const [isFavorite, setIsFavorite] = useState(false);
-
-    const addToCart = () => {
-        setItems((prevItems) => [...prevItems, { id, image, price, name, brand }]);
-    };
-
-    const toggleFavorite = () => {
-        setIsFavorite(!isFavorite);
+    const { favorites, setFavorites } = useContext(AppStateContext);
+    const [isFavorite, setIsFavorite] = useState(favorites.some((fav) => fav.id === id));
+    const handleToggleFavorite = () => {
+        toggleFavorite(favorites, setFavorites, id, image, price, name, brand, setIsFavorite, isFavorite);
     };
 
     const productLink = `/card/${id}`;
@@ -34,9 +30,9 @@ const ProductCard = ({ product }) => {
                     shape="circle"
                     size="large"
                     style={{ position: 'absolute', top: '10px', right: '10px' }}
-                    onClick={toggleFavorite}
+                    onClick={ handleToggleFavorite }
                 >
-                    {isFavorite? (
+                    {isFavorite ? (
                         <HeartTwoTone twoToneColor="#eb2f96" style={{ fontSize: '25px' }} />
                     ) : (
                         <HeartOutlined style={{ fontSize: '25px' }} />
@@ -46,7 +42,7 @@ const ProductCard = ({ product }) => {
             {price && <ProductPrice>{price} руб.</ProductPrice>}
             {name && <ProductName>{name}</ProductName>}
             {brand && <ProductBrand>{brand}</ProductBrand>}
-            <BuyButton onClick={addToCart}>Купить</BuyButton>
+            {/*<BuyButton onClick={ addToCart }>Купить</BuyButton>*/}
         </ProductCardContainer>
     );
 };

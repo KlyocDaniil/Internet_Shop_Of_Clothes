@@ -4,7 +4,36 @@ import { styled } from 'styled-components';
 export const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+`;
+
+export const CentredNotificationWrapper = styled.div `
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`;
+
+export const CentredNotification = styled.div `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-large;
+  text-align: center;
+`;
+
+export const CentredNotificationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 `;
 
 export const CartItems = styled.div`
@@ -37,8 +66,9 @@ export const CartItemImage = styled.img`
 export const CartItemInfo = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
   font-family: 'Montserrat', sans-serif;
 `;
 
@@ -49,8 +79,8 @@ export const CartItemName = styled.span`
 `;
 
 export const CartItemBrand = styled.span`
+  font-weight: bold;
   font-size: 14px;
-  color: #666;
   margin-right: 16px;
 `;
 

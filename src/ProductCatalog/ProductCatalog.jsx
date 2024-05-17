@@ -1,15 +1,19 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 import ProductCard from './ProductCard';
 import { ProductCatalogContainer, ProductCatalogList, ProductCatalogTitle } from './styledProductCatalog.ts';
-import { CartContext } from '../App';
+import { AppStateContext } from '../App';
 import products from "./products";
 
 const ProductCatalog = () => {
-    const { setItems } = useContext(CartContext);
+    const { setItems } = useContext(AppStateContext);
 
     const addToCart = (product) => {
         setItems((prevItems) => [...prevItems, product]);
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <ProductCatalogContainer>

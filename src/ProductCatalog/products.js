@@ -15,6 +15,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 1,
@@ -32,6 +33,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 2,
@@ -49,6 +51,7 @@ export const products = [
                 'Сезон . Мульти',
                 'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 3,
@@ -66,6 +69,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 4,
@@ -83,6 +87,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 5,
@@ -100,6 +105,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 6,
@@ -117,6 +123,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 7,
@@ -134,6 +141,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 8,
@@ -151,6 +159,7 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
     },
     {
         id: 9,
@@ -168,6 +177,21 @@ export const products = [
             'Сезон . Мульти',
             'Артикул . RTLADJ415901',
         ],
+        sizes: ['S', 'M', 'L']
+    },
+
+    {
+        id: 10,
+        image: "https://sun9-42.userapi.com/impg/huSYQgIQA4woVAQW9f-J3KhXgNsYGizxELzmVg/HCNLZs9cb9Q.jpg?size=1615x2160&quality=95&sign=3ea97e75e368b5508439dc2f6bd1cd58&type=album",
+        price: 1200,
+        name: "Кепка",
+        brand: "NewYork",
+        description: [
+            'Состав, %  . Хлопок - 40%, Пластик - 50%, Летние вайбы - 10%',
+            'Сезон . Мульти',
+            'Артикул . RTLADJ415901',
+        ],
+        sizes: ['S', 'M', 'L']
     }
 ];
 

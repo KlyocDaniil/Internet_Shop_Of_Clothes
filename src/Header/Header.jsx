@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { ConfigProvider, Space } from 'antd';
 import {HeartOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined} from '@ant-design/icons';
 import { StyledButtonHeader, StyledIconButton, StyledSpan } from './styledHeader.ts';
@@ -8,6 +8,7 @@ import { AppStateContext } from '../App';
 const Header = () => {
     const navigate = useNavigate();
     const { items, favorites } = useContext(AppStateContext);
+    const [itemsCount, setItemsCount] = useState(0);
 
 
     const handleCartClick = () => {
@@ -26,6 +27,11 @@ const Header = () => {
         navigate('/favorites')
     }
 
+    useEffect(() => {
+        setItemsCount(items.length);
+    }, [items]);
+
+
     return (
         <ConfigProvider
             theme={{
@@ -40,10 +46,10 @@ const Header = () => {
                     <StyledSpan>Таганрог</StyledSpan>
                 </div>
                 <Space>
-                    <StyledButtonHeader>Скидки</StyledButtonHeader>
-                    <StyledButtonHeader>Женщинам</StyledButtonHeader>
-                    <StyledButtonHeader>Мужчинам</StyledButtonHeader>
-                    <StyledButtonHeader>Детям</StyledButtonHeader>
+                    {/*<StyledButtonHeader>Скидки</StyledButtonHeader>*/}
+                    {/*<StyledButtonHeader>Женщинам</StyledButtonHeader>*/}
+                    {/*<StyledButtonHeader>Мужчинам</StyledButtonHeader>*/}
+                    {/*<StyledButtonHeader>Детям</StyledButtonHeader>*/}
                 </Space>
                 <Space>
                     <StyledIconButton > <SearchOutlined /> </StyledIconButton>
@@ -57,10 +63,11 @@ const Header = () => {
                     </StyledIconButton>
                     <StyledIconButton onClick={handleCartClick} >
                         <ShoppingCartOutlined />
-                        {items.length > 0 &&
+                        {items.length > 0 && (
                             <span style={{ marginLeft: '5px', fontSize: '12px', fontWeight: 'bold' }}>
                                 {items.length}
-                            </span>}
+                            </span>
+                        )}
                     </StyledIconButton>
                 </Space>
             </div>

@@ -36,6 +36,11 @@ const SpecificProductCard = () => {
     const { favorites, setFavorites, setItems, items } = useContext(AppStateContext);
     const [isFavorite, setIsFavorite] = useState(favorites.some((fav) => fav.id === id));
 
+    // const handleAddToCart = (product) => {
+    //     addToCart(items, setItems, product);
+    //     setItems([...items]);
+    // };
+
     const handleAddToCart = (product) => {
         addToCart(items, setItems, product);
     };

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { AppStateContext } from '../App';
 import {
     CartItem,
@@ -45,6 +45,18 @@ const Cart = () => {
     const [selectedItems, setSelectedItems] = useState(
         items.map(() => false)
     );
+
+    useEffect(() => {
+        const storedItems = localStorage.getItem("cart");
+        if (storedItems) {
+            const parsedItems = JSON.parse(storedItems);
+            setItems(parsedItems);
+        }
+    }, [setItems]);
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(items));
+    }, [items]);
 
     const [promoCode, setPromoCode] = useState('');
     const [discount, setDiscount] = useState(0);
@@ -128,7 +140,7 @@ const Cart = () => {
                         </Link>
 
                         <CartItemInfo>
-                            <CartItemName>{product.name} {product.brand}</CartItemName>
+                            <CartItemName>{product.name}, {product.brand}</CartItemName>
                             <CartItemPrice>{product.price} руб. x {product.quantity}</CartItemPrice>
                         </CartItemInfo>
 

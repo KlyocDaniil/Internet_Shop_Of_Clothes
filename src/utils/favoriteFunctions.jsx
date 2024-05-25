@@ -20,17 +20,15 @@ export const toggleFavorite = (favorites, setFavorites, id, image, price, name, 
 
 
 export const addToCart = (items, setItems, product) => {
-    const existingProduct = items.find((item) => item.id === product.id);
+    const newItems = [...items];
+    const existingProduct = newItems.find((item) => item.id === product.id);
     if (existingProduct) {
-        setItems((prevItems) => prevItems.map((item) => {
-            if (item.id === product.id) {
-                return { ...item, quantity: item.quantity + 1 };
-            }
-            return item;
-        }));
+        existingProduct.quantity += 1;
     } else {
-        setItems((prevItems) => [...prevItems, { ...product, quantity: 1 }]);
+        newItems.push({ ...product, quantity: 1 });
     }
+    setItems(newItems);
+    localStorage.setItem('cart', JSON.stringify(newItems));
     notification.success({
         message: 'Круто!',
         description: `"${product.name}  ${product.brand}"  'добавлен в корзину!' `,

@@ -31,4 +31,9 @@ export const addToCart = (items, setItems, product) => {
     } else {
         setItems((prevItems) => [...prevItems, { ...product, quantity: 1 }]);
     }
+    notification.success({
+        message: 'Круто!',
+        description: `"${product.name}  ${product.brand}"  'добавлен в корзину!' `,
+        placement: 'topLeft',
+    });
 };

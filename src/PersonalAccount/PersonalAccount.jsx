@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { MyProfile, Title, Wrapper, EditButton, PersonalInfoWrapper } from './styledPersonalAccount.ts';
 import PersonalInfo from './PersonalInfo';
-import PersonalInfoEdit from './PersonalInfoEdit';
 import Modal from '../Modal/Modal';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
+import AuthorizationForm from '../RegistrationForm/AuthorizationForm';
+import { EditButton, MyProfile, PersonalInfoWrapper, Title, Wrapper } from './styledPersonalAccount.ts';
 
 const PersonalAccount = () => {
     const [isAuthorized, setIsAuthorized] = useState(false);
-    const [personalInfo, setPersonalInfo] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
+    const [personalInfo, setPersonalInfo] = useState({});
+    const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+    const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
+
 
     useEffect(() => {
         const storedPersonalInfo = localStorage.getItem('personalInfo');
@@ -18,14 +20,6 @@ const PersonalAccount = () => {
         }
     }, []);
 
-    const handleOpenModal = () => {
-        setIsOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsOpen(false);
-    };
-
     const handleAuthorize = (form) => {
         setPersonalInfo(form);
         setIsAuthorized(true);
@@ -33,10 +27,35 @@ const PersonalAccount = () => {
     };
 
     const handleLogout = () => {
-        setIsAuthorized(false);
-        setPersonalInfo(null);
         localStorage.removeItem('personalInfo');
+        setIsAuthorized(false);
     };
+
+    const handleOpenRegistration = () => {
+        setIsRegistrationOpen(true);
+    };
+
+    const handleCloseRegistration = () => {
+        setIsRegistrationOpen(false);
+    };
+
+    const handleOpenAuthorization = () => {
+        setIsAuthorizationOpen(true);
+    };
+
+    const handleCloseAuthorization = () => {
+        setIsAuthorizationOpen(false);
+    };
+
+    useEffect(() => {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const foundUser = users.find((user) => user.email === personalInfo.email);
+
+        if (foundUser) {
+            setPersonalInfo(foundUser);
+            setIsAuthorized(true);
+        }
+    }, []);
 
     return (
         <Wrapper>
@@ -44,22 +63,47 @@ const PersonalAccount = () => {
                 <Title>Мой профиль</Title>
                 {isAuthorized ? (
                     <>
-                        <PersonalInfoWrapper>
-                            <PersonalInfo personalInfo={personalInfo} />
-                            <EditButton onClick={handleLogout}>Выйти</EditButton>
-                        </PersonalInfoWrapper>
-                        <PersonalInfoEdit personalInfo={personalInfo} onSave={setPersonalInfo} />
+                        {personalInfo && (
+                            <PersonalInfoWrapper>
+                                <PersonalInfo personalInfo={personalInfo} />
+                                <EditButton onClick={handleLogout}>Выйти</EditButton>
+                            </PersonalInfoWrapper>
+                        )}
                     </>
                 ) : (
-                    <EditButton onClick={handleOpenModal}>Войти</EditButton>
+                    <>
+                        <EditButton onClick={handleOpenAuthorization}>Авторизация</EditButton>
+                        <EditButton onClick={handleOpenRegistration}>Регистрация</EditButton>
+                    </>
                 )}
             </MyProfile>
-
-            {isOpen && (
-                <Modal onClose={handleCloseModal}>
-                    <RegistrationForm onAuthorize={handleAuthorize} />
+            {isRegistrationOpen && (
+                <Modal
+                    isOpen={isRegistrationOpen}
+                    onClose={handleCloseRegistration}
+                    title="Регистрация"
+                    footer={null}
+                >
+                    <RegistrationForm
+                        onRegister={handleAuthorize}
+                        onClose={handleCloseRegistration}
+                    />
                 </Modal>
             )}
+            {isAuthorizationOpen && (
+                <Modal
+                    isOpen={isAuthorizationOpen}
+                    onClose={handleCloseAuthorization}
+                    title="Авторизация"
+                    footer={null}
+                >
+                    <AuthorizationForm
+                        onAuthorize={handleAuthorize}
+                        onClose={handleCloseAuthorization}
+                    />
+                </Modal>
+            )}
+             {/*{personalInfo && <PersonalInfoEdit personalInfo={personalInfo} onSave={setPersonalInfo} />}*/}
         </Wrapper>
     );
 };

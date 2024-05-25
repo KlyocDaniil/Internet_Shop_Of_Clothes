@@ -17,24 +17,21 @@ import {ProductImage} from "../ProductCatalog/styledProductCard.ts";
 import {Link} from "react-router-dom";
 import notification from "antd/es/notification";
 import {AddToCartButton} from "../SpecificProductCard/styledSpecificPC.ts";
+import {addToCart} from "../utils/favoriteFunctions";
 
 
 const Favorites = () => {
-    const { favorites, setFavorites, setItems , } = useContext(AppStateContext);
+    const { favorites, setFavorites, setItems , items } = useContext(AppStateContext);
 
-    const addToCart = (product) => {
-        setItems((prevItems) => [...prevItems, product]);
-
-        notification.success({
-            message: 'Успех',
-            description: `"${product.name}  ${product.brand}"  добавлен в корзину`,
-            placement: 'topLeft',
-        });
-        removeFromCart(product)
+    const handleAddToCart = (product) => {
+        addToCart(items, setItems, product);
+        removeFromFavorites(product)
     };
 
-    const removeFromCart = (product) => {
-        setFavorites((prevItems) => prevItems.filter((item) => item!== product));
+    const removeFromFavorites = (product) => {
+        const newFavorites = favorites.filter((item) => item !== product);
+        setFavorites(newFavorites);
+        localStorage.setItem('favorites', JSON.stringify(newFavorites));
     };
 
 
@@ -63,10 +60,10 @@ const Favorites = () => {
                             <CartItemBrand>{product.brand}</CartItemBrand>
                             <CartItemPrice>{product.price} руб.</CartItemPrice>
                         </CartItemInfo>
-                        <AddToCartButton onClick={() => addToCart(product)}>
+                        <AddToCartButton onClick={() => handleAddToCart(product)}>
                             В КОРЗИНУ
                         </AddToCartButton>
-                        <RemoveButton onClick={() => removeFromCart(product)}>
+                        <RemoveButton onClick={() => removeFromFavorites(product)}>
                             <DeleteOutlined style={{ fontSize: 32, color: 'red' }} />
                         </RemoveButton>
                     </CartItem>

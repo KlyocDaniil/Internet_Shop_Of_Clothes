@@ -12,7 +12,12 @@ export const AppStateContext = createContext();
 
 const App = () => {
     const [items, setItems] = useState([]);
-    const [favorites, setFavorites] = useState([]);
+    // const [favorite, isFavorite] = useState(false)
+
+    const [favorites, setFavorites] = useState(() => {
+        const storedFavorites = localStorage.getItem('favorites');
+        return storedFavorites ? JSON.parse(storedFavorites) : [];
+    });
 
     return (
         <AppStateContext.Provider value={{ items, setItems, favorites, setFavorites }}>

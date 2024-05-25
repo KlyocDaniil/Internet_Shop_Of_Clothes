@@ -26,24 +26,18 @@ import {
 
 import { AppStateContext } from '../App';
 import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';
-import { toggleFavorite } from "../utils/favoriteFunctions";
+import {addToCart, toggleFavorite} from "../utils/favoriteFunctions";
 import products from "../ProductCatalog/products";
 import notification from "antd/es/notification";
 
 const SpecificProductCard = () => {
     const { id } = useParams();
     const currentProduct = products.find((product) => product.id === parseInt(id));
-    const { favorites, setFavorites, setItems } = useContext(AppStateContext);
+    const { favorites, setFavorites, setItems, items } = useContext(AppStateContext);
     const [isFavorite, setIsFavorite] = useState(favorites.some((fav) => fav.id === id));
 
-    const addToCart = (product) => {
-        setItems((prevItems) => [...prevItems, product]);
-
-        notification.success({
-            message: 'Успех',
-            description: `"${product.name}  ${product.brand}"  добавлен в корзину`,
-            placement: 'topLeft',
-        });
+    const handleAddToCart = (product) => {
+        addToCart(items, setItems, product);
     };
 
     useEffect(() => {
@@ -58,16 +52,12 @@ const SpecificProductCard = () => {
                 <Image src={currentProduct.image} alt={currentProduct.name} />
                 <Info>
                     <ProductDetails>
-                        <FavoriteButton
-                            onClick={() => toggleFavorite(favorites, setFavorites, currentProduct.id, currentProduct.image, currentProduct.price, currentProduct.name, currentProduct.brand, setIsFavorite, isFavorite)}>
-                            {isFavorite ? (
-                                <HeartTwoTone twoToneColor="#eb2f96" style={{ fontSize: '25px' }} />
-                            ) : (
-                                <HeartOutlined style={{ fontSize: '25px' }} />
-                            )}
-                        </FavoriteButton>
+
                         <Price>{currentProduct.name}</Price>
                         <TextCardMain>Бренд: {currentProduct.brand}</TextCardMain>
+                        <TextCardMain>Тип: {currentProduct.type}</TextCardMain>
+                        <TextCardMain>Сезон: {currentProduct.season}</TextCardMain>
+
                         <DescriptionList>
                             {currentProduct.description.map((desc, index) => (
                                 <DescriptionListItem key={index}>
@@ -84,8 +74,17 @@ const SpecificProductCard = () => {
                                 <option key={index}>{size}</option>
                             ))}
                         </Select>
+                        <FavoriteButton
+                            onClick={() => toggleFavorite(favorites, setFavorites, currentProduct.id, currentProduct.image, currentProduct.price, currentProduct.name, currentProduct.brand, setIsFavorite, isFavorite)}>
+                            {favorites.some((fav) => fav.id === currentProduct.id) ? (
+                                <HeartTwoTone twoToneColor="#eb2f96" style={{ fontSize: '25px' }} />
+                            ) : (
+                                <HeartOutlined style={{ fontSize: '25px' }} />
+                            )}
+                        </FavoriteButton>
                     </SizeSelect>
-                    <AddToCartButton onClick={() => addToCart(currentProduct)}>
+
+                    <AddToCartButton onClick={() => handleAddToCart(currentProduct)}>
                         В КОРЗИНУ
                     </AddToCartButton>
                 </Info>

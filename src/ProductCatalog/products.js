@@ -5,6 +5,8 @@ export const products = [
         price: 5090,
         name: "Худи",
         brand: "Lyle & Scott",
+        type: "Куртка",
+        season: "Осень-Весна",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -23,6 +25,8 @@ export const products = [
         price: 1250,
         name: "Толстовка",
         brand: "Tommy Hilfiger",
+        type: "Свитер",
+        season: "Осень-Зима",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -41,15 +45,17 @@ export const products = [
         price: 8300,
         name: "Футболка",
         brand: "Boss",
+        type: "Майка",
+        season: "Лето",
         description:[
-                'Состав, %  . Хлопок - 100%',
-                'Размер товара на модели . L INT',
-                'Параметры модели . 100-75-94',
-                'Рост модели на фото .  181 см',
-                'Длина (см) . 75 см',
-                'Длина рукава (см) . 27 см',
-                'Сезон . Мульти',
-                'Артикул . RTLADJ415901',
+            'Состав, %  . Хлопок - 100%',
+            'Размер товара на модели . L INT',
+            'Параметры модели . 100-75-94',
+            'Рост модели на фото .  181 см',
+            'Длина (см) . 75 см',
+            'Длина рукава (см) . 27 см',
+            'Сезон . Мульти',
+            'Артикул . RTLADJ415901',
         ],
         sizes: ['S', 'M', 'L']
     },
@@ -59,6 +65,8 @@ export const products = [
         price: 1390,
         name: "Поло",
         brand: "Lufian",
+        type: "Рубашка",
+        season: "Лето",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -77,6 +85,8 @@ export const products = [
         price: 4549,
         name: "Ветровка",
         brand: "oodji",
+        type: "Куртка",
+        season: "Весна-Осень",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -95,6 +105,8 @@ export const products = [
         price: 2299,
         name: "Футболка",
         brand: "Sela",
+        type: "Майка",
+        season: "Лето",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -113,6 +125,8 @@ export const products = [
         price: 4990,
         name: "Свитшот",
         brand: "Shu",
+        type: "Блуза",
+        season: "Весна-Лето",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -131,6 +145,8 @@ export const products = [
         price: 2970,
         name: "Футболка",
         brand: "adidas Originals",
+        type: "Майка",
+        season: "Лето",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -149,6 +165,8 @@ export const products = [
         price: 4990,
         name: "Брюки спортивные",
         brand: "Dewear",
+        type: "Штаны",
+        season: "Весна-Лето",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -167,6 +185,8 @@ export const products = [
         price: 3299,
         name: "Шорты джинсовые",
         brand: "Sela",
+        type: "Шорты",
+        season: "Лето",
         description: [
             'Состав, %  . Хлопок - 100%',
             'Размер товара на модели . L INT',
@@ -179,13 +199,14 @@ export const products = [
         ],
         sizes: ['S', 'M', 'L']
     },
-
     {
         id: 10,
         image: "https://sun9-42.userapi.com/impg/huSYQgIQA4woVAQW9f-J3KhXgNsYGizxELzmVg/HCNLZs9cb9Q.jpg?size=1615x2160&quality=95&sign=3ea97e75e368b5508439dc2f6bd1cd58&type=album",
+        name: 'Кэпка',
         price: 1200,
-        name: "Кепка",
         brand: "NewYork",
+        type: "Головной убор",
+        season: "Лето",
         description: [
             'Состав, %  . Хлопок - 40%, Пластик - 50%, Летние вайбы - 10%',
             'Сезон . Мульти',
@@ -195,4 +216,4 @@ export const products = [
     }
 ];
 
-export default products
+export default products;

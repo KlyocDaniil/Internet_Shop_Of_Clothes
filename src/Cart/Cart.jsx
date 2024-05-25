@@ -20,16 +20,23 @@ import {
     ApplyPromoCodeButton,
     CheckoutButton,
     PromocodeInputButton,
-    PromoCodeInput, CentredNotification, CentredNotificationContainer, CentredNotificationWrapper,
+    PromoCodeInput,
+    CentredNotification,
+    CentredNotificationContainer,
+    CentredNotificationWrapper,
+    CartQuantity,
+    CartQuantityButton, CartQuantityInput,
 } from './styledCart.ts';
 import { ProductCatalogTitle } from "../ProductCatalog/styledProductCatalog.ts";
-import {DeleteOutlined} from "@ant-design/icons";
+import {DeleteOutlined, MinusOutlined, PlusOutlined} from "@ant-design/icons";
 import notification from "antd/es/notification";
+import {Link} from "react-router-dom";
+import {Button} from "antd";
 
 const Cart = () => {
     const { items, setItems } = useContext(AppStateContext);
 
-    const promoCodes = ['SPRING20', 'FORYOU50', 'SANYOK70', 'NASTYA90'];
+    const promoCodes = ['SPRING20', 'FORYOU50', 'SANYOK70', 'NASTYA90', 'ZHARR50'];
 
     const removeFromCart = (product) => {
         setItems((prevItems) => prevItems.filter((item) => item!== product));
@@ -50,14 +57,25 @@ const Cart = () => {
         });
     };
 
+    const handleQuantityChange = (productId, quantityChange) => {
+        setItems((prevItems) => prevItems.map((item) => {
+            if (item.id === productId) {
+                return { ...item, quantity: Math.max(1, item.quantity + quantityChange) };
+            }
+            return item;
+        }));
+    };
+
     const totalPrice = items.reduce((acc, item, index) => {
         if (selectedItems[index]) {
-            return acc + item.price;
+            return acc + item.price * item.quantity;
         }
         return acc;
     }, 0);
 
     const itemsCount = selectedItems.filter(Boolean).length;
+
+
 
     if (!items.length) {
         return (
@@ -91,23 +109,45 @@ const Cart = () => {
         }
     };
 
+    const endPrice = totalPrice + deliveryCost - discount
+
     return (
         <CartContainer>
             <ProductCatalogTitle>Корзина</ProductCatalogTitle>
             <CartItems>
                 {items.map((product, index) => (
                     <CartItem key={product.id}>
-                        <CartItemImage src={product.image} />
+                        <Checkbox
+                            type="checkbox"
+                            checked={selectedItems[index]}
+                            onChange={() => handleItemSelectionChange(index)}
+                        />
+
+                        <Link to={`/card/${product.id}`}>
+                            <CartItemImage src={product.image} alt={product.name} />
+                        </Link>
+
                         <CartItemInfo>
-                            <Checkbox
-                                type="checkbox"
-                                checked={selectedItems[index]}
-                                onChange={() => handleItemSelectionChange(index)}
-                            />
-                            <CartItemName>{product.name}</CartItemName>
-                            <CartItemBrand>{product.brand}</CartItemBrand>
-                            <CartItemPrice>{product.price} руб.</CartItemPrice>
+                            <CartItemName>{product.name} {product.brand}</CartItemName>
+                            <CartItemPrice>{product.price} руб. x {product.quantity}</CartItemPrice>
                         </CartItemInfo>
+
+                        <CartQuantity>
+                            <CartQuantityButton
+                                type="primary"
+                                shape="circle"
+                                icon={<MinusOutlined />}
+                                onClick={() => handleQuantityChange(product.id, -1)}
+                            />
+                            <CartQuantityInput style={{ margin: '0 10px' }}>{product.quantity}</CartQuantityInput>
+                            <CartQuantityButton
+                                type="primary"
+                                shape="circle"
+                                icon={<PlusOutlined />}
+                                onClick={() => handleQuantityChange(product.id, 1)}
+                            />
+                        </CartQuantity>
+
                         <RemoveButton onClick={() => removeFromCart(product)}>
                             <DeleteOutlined style={{ fontSize: 32, color: 'red' }} />
                         </RemoveButton>
@@ -119,7 +159,7 @@ const Cart = () => {
                 <TotalCost>Стоимость: {totalPrice} руб.</TotalCost>
                 <Discount>Скидка: {discount} руб.</Discount>
                 <Delivery>Доставка: {deliveryCost} руб.</Delivery>
-                <TotalPrice>Итого: {totalPrice + deliveryCost - discount} руб.</TotalPrice>
+                <TotalPrice>Итого: {endPrice.toFixed()} руб.</TotalPrice>
                 <PromocodeInputButton>
                     <PromoCodeInput
                         value={promoCode}
@@ -127,7 +167,7 @@ const Cart = () => {
                         placeholder="Введите промокод"
                     />
                     <ApplyPromoCodeButton type="primary" onClick={handleApplyPromoCode}>
-                        Применить
+                        Применить промокод
                     </ApplyPromoCodeButton>
                 </PromocodeInputButton>
                 <CheckoutButton type="primary">

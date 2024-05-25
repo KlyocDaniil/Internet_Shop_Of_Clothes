@@ -1,5 +1,6 @@
 // styledCart.ts
 import { styled } from 'styled-components';
+import {Button} from "antd";
 
 export const CartContainer = styled.div`
   display: flex;
@@ -40,42 +41,45 @@ export const CartItems = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 30%;
   margin-top: 32px;
 `;
 
 export const CartItem = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  width: 1150px;
+  width: 960px;
   height: 10%;
   padding: 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
   margin: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center; /* Add this line */
 `;
 
 export const CartItemImage = styled.img`
-  width: 20%;
-  object-fit: cover;
+  
+  height: 200px;
+  object-fit: contain;
   margin-bottom: 16px;
 `;
 
 export const CartItemInfo = styled.div`
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
   font-family: 'Montserrat', sans-serif;
+  justify-content: space-between;
+  margin: 20px 20px;
 `;
 
 export const CartItemName = styled.span`
   font-size: 16px;
   font-weight: bold;
   margin-right: 16px;
+  display: flex;
 `;
 
 export const CartItemBrand = styled.span`
@@ -84,6 +88,34 @@ export const CartItemBrand = styled.span`
   margin-right: 16px;
 `;
 
+export const CartQuantity = styled.div `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 0 10px;
+  margin: 0 16px; /* Add this line */
+`;
+export const CartQuantityButton = styled(Button)`
+  background-color: #333;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  svg {
+    color: #fff;
+  }
+`;
+
+export const CartQuantityInput = styled.span `
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 10px;
+`
 export const CartItemPrice = styled.span`
   font-size: 16px;
   font-weight: bold;
@@ -103,7 +135,7 @@ export const Checkbox = styled.input`
 `;
 
 export const InfoCart = styled.div`
-  width: 60%;
+  width: 50%;
   border: 2px solid #ddd;
   border-radius: 10px;
   padding: 20px;

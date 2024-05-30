@@ -10,7 +10,6 @@ export const StyledButtonHeader = styled.button`
   transition: all 0.3s ease-in-out;
   font-size: 20px;
   margin-right: 15px;
-  font-family: 'Montserrat', sans-serif;
 
   &:hover {
     background-color: #3333;

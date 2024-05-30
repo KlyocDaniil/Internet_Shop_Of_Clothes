@@ -36,7 +36,7 @@ import {Button} from "antd";
 const Cart = () => {
     const { items, setItems } = useContext(AppStateContext);
 
-    const promoCodes = ['SPRING20', 'FORYOU50', 'SANYOK70', 'NASTYA90', 'ZHARR50'];
+    const promoCodes = ['SPRING20', 'FORYOU50', 'SANYOK70', 'NASTYA90', 'ZHARR50', 'SFEDU30'];
 
     const removeFromCart = (product) => {
         setItems((prevItems) => prevItems.filter((item) => item!== product));
@@ -87,8 +87,6 @@ const Cart = () => {
 
     const itemsCount = selectedItems.filter(Boolean).length;
 
-
-
     if (!items.length) {
         return (
             <CartContainer>
@@ -109,11 +107,11 @@ const Cart = () => {
     const handleApplyPromoCode = () => {
         const promoCodeFound = promoCodes.find((code) => code === promoCode.toUpperCase());
         if (promoCodeFound) {
-            const discountAmount = (totalPrice * parseInt(promoCodeFound.slice(6))) / 100;
+            const discountAmount = (totalPrice * parseInt(promoCodeFound.slice(5))) / 100;
             setDiscount(discountAmount);
             notification.success({
                 message: 'Промокод применен',
-                description: `Активирован промокод ${promoCode}! Процент скидки: ${parseInt(promoCodeFound.slice(6))}%`,
+                description: `Активирован промокод ${promoCode}! Процент скидки: ${parseInt(promoCodeFound.slice(5))}%`,
                 placement: 'topLeft',
             });
         } else {
@@ -167,7 +165,7 @@ const Cart = () => {
                 ))}
             </CartItems>
             <InfoCart>
-                <ItemsCount>Количество элементов: {itemsCount}</ItemsCount>
+                <ItemsCount>Количество выбранных элементов: {itemsCount}</ItemsCount>
                 <TotalCost>Стоимость: {totalPrice} руб.</TotalCost>
                 <Discount>Скидка: {discount} руб.</Discount>
                 <Delivery>Доставка: {deliveryCost} руб.</Delivery>

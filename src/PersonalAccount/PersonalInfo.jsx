@@ -27,7 +27,7 @@ const PersonalInfo = ({ personalInfo }) => {
             </InfoColumn>
             <InfoColumn>
                 <ColumnTitle>Бонусы:</ColumnTitle>
-                <ColumnContent>-</ColumnContent>
+                <ColumnContent> - </ColumnContent>
             </InfoColumn>
         </Personal>
     );

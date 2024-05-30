@@ -36,11 +36,6 @@ const SpecificProductCard = () => {
     const { favorites, setFavorites, setItems, items } = useContext(AppStateContext);
     const [isFavorite, setIsFavorite] = useState(favorites.some((fav) => fav.id === id));
 
-    // const handleAddToCart = (product) => {
-    //     addToCart(items, setItems, product);
-    //     setItems([...items]);
-    // };
-
     const handleAddToCart = (product) => {
         addToCart(items, setItems, product);
     };
@@ -57,8 +52,8 @@ const SpecificProductCard = () => {
                 <Image src={currentProduct.image} alt={currentProduct.name} />
                 <Info>
                     <ProductDetails>
-
                         <Price>{currentProduct.name}</Price>
+
                         <TextCardMain>Бренд: {currentProduct.brand}</TextCardMain>
                         <TextCardMain>Тип: {currentProduct.type}</TextCardMain>
                         <TextCardMain>Сезон: {currentProduct.season}</TextCardMain>
@@ -72,6 +67,7 @@ const SpecificProductCard = () => {
                             ))}
                         </DescriptionList>
                     </ProductDetails>
+
                     <Price>Цена: {currentProduct.price} руб.</Price>
                     <SizeSelect>
                         <Select defaultValue="Выберите размер">
@@ -92,23 +88,29 @@ const SpecificProductCard = () => {
                     <AddToCartButton onClick={() => handleAddToCart(currentProduct)}>
                         В КОРЗИНУ
                     </AddToCartButton>
+
                 </Info>
             </Wrapper>
+
             <OtherProductsWrap><OtherProductsTitle>
                 <div>Остальные товары</div>
                 <Link to={`/catalog`}>
                     <div>В каталог</div>
+                {/*    убрать А тег*/}
                 </Link>
             </OtherProductsTitle>
                 {otherProducts.map((product) => (
                     <OtherProductCard key={product.id}>
+
                         <Link to={`/card/${product.id}`}>
                             <OtherProductImage src={product.image} alt={product.name} />
                         </Link>
+
                         <OtherProductInfo>
                             <OtherProductPrice>{product.name}</OtherProductPrice>
                             <OtherProductPrice>Цена: {product.price} руб.</OtherProductPrice>
                         </OtherProductInfo>
+
                     </OtherProductCard>
                 ))}
             </OtherProductsWrap>

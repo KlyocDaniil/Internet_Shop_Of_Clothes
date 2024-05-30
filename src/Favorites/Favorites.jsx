@@ -3,7 +3,7 @@ import { AppStateContext } from "../App";
 import {
     CartContainer,
     CartItem,
-    CartItemBrand,
+    CartItemBrand, CartItemImage,
     CartItemInfo,
     CartItemName,
     CartItemPrice, CentredNotification, CentredNotificationWrapper,
@@ -53,7 +53,7 @@ const Favorites = () => {
                 {favorites.map((product, index) => (
                     <CartItem key={product.id}>
                         <Link to={`/card/${product.id}`}>
-                            <ProductImage src={product.image} alt={product.name} />
+                            <CartItemImage src={product.image} alt={product.name} />
                         </Link>
                         <CartItemInfo>
                             <CartItemName>{product.name}</CartItemName>

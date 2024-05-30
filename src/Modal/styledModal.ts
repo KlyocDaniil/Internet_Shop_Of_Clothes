@@ -15,6 +15,9 @@ export const ModalWrapper = styled.div `
 export const ModalContent = styled.div `
   background-color: #FFFFFF;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 10px;
   width: 50%;
 `;

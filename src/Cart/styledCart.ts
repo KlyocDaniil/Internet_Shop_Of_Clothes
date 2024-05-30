@@ -67,11 +67,11 @@ export const CartItemImage = styled.img`
 
 export const CartItemInfo = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  //align-items: center;
   width: 90%;
   font-family: 'Montserrat', sans-serif;
-  justify-content: space-between;
+  //justify-content: space-between;
   margin: 20px 20px;
 `;
 
@@ -118,7 +118,7 @@ export const CartQuantityInput = styled.span `
 `
 export const CartItemPrice = styled.span`
   font-size: 16px;
-  font-weight: bold;
+  //font-weight: bold;
   color: #333;
 `;
 

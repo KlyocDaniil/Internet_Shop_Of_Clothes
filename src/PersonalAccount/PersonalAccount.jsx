@@ -11,7 +11,6 @@ const PersonalAccount = () => {
     const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
     const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
 
-
     useEffect(() => {
         const storedPersonalInfo = localStorage.getItem('personalInfo');
         if (storedPersonalInfo) {
@@ -82,7 +81,7 @@ const PersonalAccount = () => {
                     isOpen={isRegistrationOpen}
                     onClose={handleCloseRegistration}
                     title="Регистрация"
-                    footer={null}
+                    // footer={null}
                 >
                     <RegistrationForm
                         onRegister={handleAuthorize}

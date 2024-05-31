@@ -32,9 +32,11 @@ import {DeleteOutlined, MinusOutlined, PlusOutlined} from "@ant-design/icons";
 import notification from "antd/es/notification";
 import {Link} from "react-router-dom";
 import {Button} from "antd";
+import useLocalStorage from '../customHooks/useLocalStorage.jsx';
+import moment from "moment";
 
 const Cart = () => {
-    const { items, setItems } = useContext(AppStateContext);
+    const { items, setItems, orders, setOrders } = useContext(AppStateContext);
 
     const promoCodes = ['SPRING20', 'FORYOU50', 'SANYOK70', 'NASTYA90', 'ZHARR50', 'SFEDU30'];
 
@@ -46,16 +48,11 @@ const Cart = () => {
         items.map(() => false)
     );
 
-    useEffect(() => {
-        const storedItems = localStorage.getItem("cart");
-        if (storedItems) {
-            const parsedItems = JSON.parse(storedItems);
-            setItems(parsedItems);
-        }
-    }, [setItems]);
+    const [cart, setCart] = useLocalStorage('cart', items);
+    const [ordersState, setOrdersState] = useLocalStorage('orders', orders);
 
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(items));
+        setCart(items);
     }, [items]);
 
     const [promoCode, setPromoCode] = useState('');
@@ -72,13 +69,13 @@ const Cart = () => {
     const handleQuantityChange = (productId, quantityChange) => {
         setItems((prevItems) => prevItems.map((item) => {
             if (item.id === productId) {
-                return { ...item, quantity: Math.max(1, item.quantity + quantityChange) };
+                return {...item, quantity: Math.max(1, item.quantity + quantityChange) };
             }
             return item;
         }));
     };
 
-    const totalPrice = items.reduce((acc, item, index) => {
+    const totalPrice = cart.reduce((acc, item, index) => {
         if (selectedItems[index]) {
             return acc + item.price * item.quantity;
         }
@@ -87,7 +84,21 @@ const Cart = () => {
 
     const itemsCount = selectedItems.filter(Boolean).length;
 
-    if (!items.length) {
+    const handleCheckout = () => {
+        const selectedItemsArray = cart.filter((item, index) => selectedItems[index]);
+        const ordersWithDate = selectedItemsArray.map((item) => ({
+            ...item,
+            orderDate: moment().format('DD-MM-YYYY HH:mm'), // формат даты и времени заказа
+        }));
+        setOrdersState((prevOrders) => [...prevOrders,...ordersWithDate]);
+        setOrders([...orders,...ordersWithDate]);
+        setCart(cart.filter((item) =>!selectedItems.includes(item)));
+        setSelectedItems(selectedItems.map(() => false));
+        selectedItemsArray.forEach(removeFromCart);
+        setCart(cart);
+    };
+
+    if (!cart.length) {
         return (
             <CartContainer>
                 <CentredNotificationWrapper>
@@ -125,7 +136,7 @@ const Cart = () => {
         <CartContainer>
             <ProductCatalogTitle>Корзина</ProductCatalogTitle>
             <CartItems>
-                {items.map((product, index) => (
+                {cart.map((product, index) => (
                     <CartItem key={product.id}>
                         <Checkbox
                             type="checkbox"
@@ -159,7 +170,7 @@ const Cart = () => {
                         </CartQuantity>
 
                         <RemoveButton onClick={() => removeFromCart(product)}>
-                            <DeleteOutlined style={{ fontSize: 32, color: 'red' }} />
+                            <DeleteOutlined style={{ fontSize: 32, color: 'ed' }} />
                         </RemoveButton>
                     </CartItem>
                 ))}
@@ -180,7 +191,7 @@ const Cart = () => {
                         Применить промокод
                     </ApplyPromoCodeButton>
                 </PromocodeInputButton>
-                <CheckoutButton type="primary">
+                <CheckoutButton type="primary" onClick={handleCheckout}>
                     Перейти к оформлению
                 </CheckoutButton>
             </InfoCart>

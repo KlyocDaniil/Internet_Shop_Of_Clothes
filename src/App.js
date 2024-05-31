@@ -8,19 +8,30 @@ import products from "./ProductCatalog/products";
 import NewCollection from "./NewCollection/NewCollection";
 import PersonalAccount from "./PersonalAccount/PersonalAccount";
 import Favorites from "./Favorites/Favorites";
+import personalInfo from "./PersonalAccount/PersonalInfo";
 export const AppStateContext = createContext();
 
 const App = () => {
-    const [items, setItems] = useState([]);
+    // const [items, setItems] = useState([]);
     // const [favorite, isFavorite] = useState(false)
+
+    const [items, setItems] = useState(() => {
+        const storedItems = localStorage.getItem('cart');
+        return storedItems ? JSON.parse(storedItems) : [];
+    });
 
     const [favorites, setFavorites] = useState(() => {
         const storedFavorites = localStorage.getItem('favorites');
         return storedFavorites ? JSON.parse(storedFavorites) : [];
     });
 
+    const [orders, setOrders] = useState( () => {
+        const storedOrders = localStorage.getItem('orders')
+        return storedOrders ? JSON.parse(storedOrders) : []
+    })
+
     return (
-        <AppStateContext.Provider value={{ items, setItems, favorites, setFavorites }}>
+        <AppStateContext.Provider value={{ items, setItems, favorites, setFavorites, orders, setOrders }}>
             <BrowserRouter>
                 <Header />
                 <Routes>

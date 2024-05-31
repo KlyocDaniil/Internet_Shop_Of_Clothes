@@ -13,7 +13,7 @@ import {
 import {FavContainer, FavItems} from "./styledFavorites.js";
 import {ProductCatalogTitle} from "../ProductCatalog/styledProductCatalog.js";
 import {DeleteOutlined} from "@ant-design/icons";
-import {ProductImage} from "../ProductCatalog/styledProductCard.js";
+import {ProductImage} from "../ProductCatalog/ProductCard/styledProductCard.js";
 import {Link} from "react-router-dom";
 import notification from "antd/es/notification";
 import {AddToCartButton} from "../SpecificProductCard/styledSpecificPC.js";

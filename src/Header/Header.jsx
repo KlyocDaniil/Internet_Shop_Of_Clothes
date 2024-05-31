@@ -1,7 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { ConfigProvider, Space } from 'antd';
 import {HeartOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined} from '@ant-design/icons';
-import { StyledButtonHeader, StyledIconButton, StyledSpan } from './styledHeader.js';
+import {
+    CartIconButton, CounterItemsHeader, FavoritesIconButton, HeaderContainer, LocationFromProfile, Logo,
+    SearchIconButton,
+    UserIconButton
+} from './styledHeader.js';
 import { useNavigate } from 'react-router-dom';
 import { AppStateContext } from '../App';
 
@@ -9,28 +13,19 @@ const Header = () => {
     const navigate = useNavigate();
     const { items, favorites } = useContext(AppStateContext);
     const [itemsCount, setItemsCount] = useState(0);
+    const [personalInfo, setPersonalInfo] = useState('');
 
-
-    const handleCartClick = () => {
-        navigate('/cart');
+    const handleNavigation = (route) => {
+        navigate(route);
     };
-
-    const handleMainClick = () => {
-        navigate('/catalog')
-    }
-
-    const handleAccountClick = () => {
-        navigate('/account')
-    }
-
-    const handleFavoritesClick = () => {
-        navigate('/favorites')
-    }
 
     useEffect(() => {
         setItemsCount(items.length);
+        const info = localStorage.getItem('personalInfo');
+        if (info) {
+            setPersonalInfo(JSON.parse(info));
+        }
     }, [items]);
-
 
     return (
         <ConfigProvider
@@ -40,37 +35,33 @@ const Header = () => {
                 },
             }}
         >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#1D1D1D', padding: '0 20px', height: '80px' }}>
-                <div>
-                    <StyledSpan onClick={handleMainClick}> KlyocShop</StyledSpan>
-                    <StyledSpan>Таганрог</StyledSpan>
-                </div>
+            <HeaderContainer>
+                <Logo onClick={() => handleNavigation('/catalog')}>KlyocShop</Logo>
+                <Logo>
+                    <LocationFromProfile/>
+                    {personalInfo.city}
+                </Logo>
                 <Space>
-                    {/*<StyledButtonHeader>Скидки</StyledButtonHeader>*/}
-                    {/*<StyledButtonHeader>Женщинам</StyledButtonHeader>*/}
-                    {/*<StyledButtonHeader>Мужчинам</StyledButtonHeader>*/}
-                    {/*<StyledButtonHeader>Детям</StyledButtonHeader>*/}
-                </Space>
-                <Space>
-                    <StyledIconButton > <SearchOutlined /> </StyledIconButton>
-                    <StyledIconButton onClick={handleAccountClick}> <UserOutlined /> </StyledIconButton>
-                    <StyledIconButton onClick={handleFavoritesClick} >
+                    <SearchIconButton> <SearchOutlined /> </SearchIconButton>
+                    <UserIconButton onClick={() => handleNavigation('/account')}> <UserOutlined /> </UserIconButton>
+                    <FavoritesIconButton onClick={() => handleNavigation('/favorites')}>
                         <HeartOutlined />
-                        {favorites.length > 0 &&
-                            <span style={{ marginLeft: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                        {favorites.length > 0 && (
+                            <CounterItemsHeader>
                                 {favorites.length}
-                            </span>}
-                    </StyledIconButton>
-                    <StyledIconButton onClick={handleCartClick} >
+                            </CounterItemsHeader>
+                        )}
+                    </FavoritesIconButton>
+                    <CartIconButton onClick={() => handleNavigation('/cart')}>
                         <ShoppingCartOutlined />
                         {items.length > 0 && (
-                            <span style={{ marginLeft: '5px', fontSize: '12px', fontWeight: 'bold' }}>
+                            <CounterItemsHeader>
                                 {items.length}
-                            </span>
+                            </CounterItemsHeader>
                         )}
-                    </StyledIconButton>
+                    </CartIconButton>
                 </Space>
-            </div>
+            </HeaderContainer>
         </ConfigProvider>
     );
 };

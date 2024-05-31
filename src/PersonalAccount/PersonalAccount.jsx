@@ -4,12 +4,13 @@ import Modal from '../Modal/Modal';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 import AuthorizationForm from '../RegistrationForm/AuthorizationForm';
 import { EditButton, MyProfile, PersonalInfoWrapper, Title, Wrapper } from './styledPersonalAccount.js';
+import Orders from "./Orders/Orders";
 
 const PersonalAccount = () => {
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [personalInfo, setPersonalInfo] = useState({});
-    const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
-    const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalType, setModalType] = useState('');
 
     useEffect(() => {
         const storedPersonalInfo = localStorage.getItem('personalInfo');
@@ -30,20 +31,13 @@ const PersonalAccount = () => {
         setIsAuthorized(false);
     };
 
-    const handleOpenRegistration = () => {
-        setIsRegistrationOpen(true);
+    const handleModal = (type) => {
+        setIsModalOpen(true);
+        setModalType(type);
     };
 
-    const handleCloseRegistration = () => {
-        setIsRegistrationOpen(false);
-    };
-
-    const handleOpenAuthorization = () => {
-        setIsAuthorizationOpen(true);
-    };
-
-    const handleCloseAuthorization = () => {
-        setIsAuthorizationOpen(false);
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
     };
 
     useEffect(() => {
@@ -60,7 +54,7 @@ const PersonalAccount = () => {
         <Wrapper>
             <MyProfile>
                 <Title>Мой профиль</Title>
-                {isAuthorized ? (
+                {isAuthorized? (
                     <>
                         {personalInfo && (
                             <PersonalInfoWrapper>
@@ -71,38 +65,32 @@ const PersonalAccount = () => {
                     </>
                 ) : (
                     <>
-                        <EditButton onClick={handleOpenAuthorization}>Авторизация</EditButton>
-                        <EditButton onClick={handleOpenRegistration}>Регистрация</EditButton>
+                        <EditButton onClick={() => handleModal('authorization')}>Авторизация</EditButton>
+                        <EditButton onClick={() => handleModal('registration')}>Регистрация</EditButton>
                     </>
                 )}
             </MyProfile>
-            {isRegistrationOpen && (
+            {isModalOpen && (
                 <Modal
-                    isOpen={isRegistrationOpen}
-                    onClose={handleCloseRegistration}
-                    title="Регистрация"
-                    // footer={null}
-                >
-                    <RegistrationForm
-                        onRegister={handleAuthorize}
-                        onClose={handleCloseRegistration}
-                    />
-                </Modal>
-            )}
-            {isAuthorizationOpen && (
-                <Modal
-                    isOpen={isAuthorizationOpen}
-                    onClose={handleCloseAuthorization}
-                    title="Авторизация"
+                    isOpen={isModalOpen}
+                    onClose={handleCloseModal}
+                    title={modalType === 'registration' ? 'Регистрация' : 'Авторизация'}
                     footer={null}
                 >
-                    <AuthorizationForm
-                        onAuthorize={handleAuthorize}
-                        onClose={handleCloseAuthorization}
-                    />
+                    {modalType === 'registration'? (
+                        <RegistrationForm
+                            onRegister={handleAuthorize}
+                            onClose={handleCloseModal}
+                        />
+                    ) : (
+                        <AuthorizationForm
+                            onAuthorize={handleAuthorize}
+                            onClose={handleCloseModal}
+                        />
+                    )}
                 </Modal>
             )}
-             {/*{personalInfo && <PersonalInfoEdit personalInfo={personalInfo} onSave={setPersonalInfo} />}*/}
+            {personalInfo && <Orders />}
         </Wrapper>
     );
 };

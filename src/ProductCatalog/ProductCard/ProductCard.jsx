@@ -4,8 +4,8 @@ import { ProductCardContainer, ProductImage, ProductPrice, ProductName, ProductB
 import { useContext } from 'react';
 import { Button } from "antd";
 import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';
-import {AppStateContext} from "../App";
-import { toggleFavorite } from "../utils/favoriteFunctions";
+import {AppStateContext} from "../../App";
+import { toggleFavorite } from "../../utils/favoriteFunctions";
 
 const ProductCard = ({ product }) => {
     const { id, image, price, name, brand } = product;

@@ -9,14 +9,14 @@ import {
     CartItemPrice, CentredNotification, CentredNotificationWrapper,
     RemoveButton,
 
-} from "../Cart/styledCart.ts";
-import {FavContainer, FavItems} from "./styledFavorites.ts";
-import {ProductCatalogTitle} from "../ProductCatalog/styledProductCatalog.ts";
+} from "../Cart/styledCart.js";
+import {FavContainer, FavItems} from "./styledFavorites.js";
+import {ProductCatalogTitle} from "../ProductCatalog/styledProductCatalog.js";
 import {DeleteOutlined} from "@ant-design/icons";
-import {ProductImage} from "../ProductCatalog/styledProductCard.ts";
+import {ProductImage} from "../ProductCatalog/styledProductCard.js";
 import {Link} from "react-router-dom";
 import notification from "antd/es/notification";
-import {AddToCartButton} from "../SpecificProductCard/styledSpecificPC.ts";
+import {AddToCartButton} from "../SpecificProductCard/styledSpecificPC.js";
 import {addToCart} from "../utils/favoriteFunctions";
 
 

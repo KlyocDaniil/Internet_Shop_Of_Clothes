@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import ProductCard from './ProductCard';
-import { ProductCatalogContainer, ProductCatalogList, ProductCatalogTitle } from './styledProductCatalog.ts';
+import { ProductCatalogContainer, ProductCatalogList, ProductCatalogTitle } from './styledProductCatalog.js';
 import { AppStateContext } from '../App';
 import products from "./products";
 

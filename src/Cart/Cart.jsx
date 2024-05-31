@@ -26,8 +26,8 @@ import {
     CentredNotificationWrapper,
     CartQuantity,
     CartQuantityButton, CartQuantityInput,
-} from './styledCart.ts';
-import { ProductCatalogTitle } from "../ProductCatalog/styledProductCatalog.ts";
+} from './styledCart.js';
+import { ProductCatalogTitle } from "../ProductCatalog/styledProductCatalog.js";
 import {DeleteOutlined, MinusOutlined, PlusOutlined} from "@ant-design/icons";
 import notification from "antd/es/notification";
 import {Link} from "react-router-dom";

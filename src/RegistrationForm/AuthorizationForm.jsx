@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EditTitle, EditForm, EditInput, EditButton, EditLabel } from '../PersonalAccount/styledPersonalAccount.ts';
+import { EditTitle, EditForm, EditInput, EditButton, EditLabel } from '../PersonalAccount/styledPersonalAccount.js';
 import { notification } from 'antd';
 
 const AuthorizationForm = ({ onAuthorize, onClose }) => {

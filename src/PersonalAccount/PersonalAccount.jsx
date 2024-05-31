@@ -3,7 +3,7 @@ import PersonalInfo from './PersonalInfo';
 import Modal from '../Modal/Modal';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 import AuthorizationForm from '../RegistrationForm/AuthorizationForm';
-import { EditButton, MyProfile, PersonalInfoWrapper, Title, Wrapper } from './styledPersonalAccount.ts';
+import { EditButton, MyProfile, PersonalInfoWrapper, Title, Wrapper } from './styledPersonalAccount.js';
 
 const PersonalAccount = () => {
     const [isAuthorized, setIsAuthorized] = useState(false);

@@ -22,7 +22,7 @@ import {
     DescriptionValue,
     DescriptionList,
     FavoriteButton,
-} from './styledSpecificPC.ts';
+} from './styledSpecificPC.js';
 
 import { AppStateContext } from '../App';
 import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';

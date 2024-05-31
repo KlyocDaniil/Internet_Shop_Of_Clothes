@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { ConfigProvider, Space } from 'antd';
 import {HeartOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined} from '@ant-design/icons';
-import { StyledButtonHeader, StyledIconButton, StyledSpan } from './styledHeader.ts';
+import { StyledButtonHeader, StyledIconButton, StyledSpan } from './styledHeader.js';
 import { useNavigate } from 'react-router-dom';
 import { AppStateContext } from '../App';
 

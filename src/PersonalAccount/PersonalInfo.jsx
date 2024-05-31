@@ -1,5 +1,5 @@
 import React from 'react';
-import { Personal, InfoColumn, ColumnTitle, ColumnContent } from './styledPersonalAccount.ts';
+import { Personal, InfoColumn, ColumnTitle, ColumnContent } from './styledPersonalAccount.js';
 
 const PersonalInfo = ({ personalInfo }) => {
     if (!personalInfo) {

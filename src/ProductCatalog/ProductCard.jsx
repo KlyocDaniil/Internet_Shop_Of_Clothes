@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ProductCardContainer, ProductImage, ProductPrice, ProductName, ProductBrand, BuyButton } from './styledProductCard.ts';
+import { ProductCardContainer, ProductImage, ProductPrice, ProductName, ProductBrand, BuyButton } from './styledProductCard.js';
 import { useContext } from 'react';
 import { Button } from "antd";
 import { HeartOutlined, HeartTwoTone } from '@ant-design/icons';

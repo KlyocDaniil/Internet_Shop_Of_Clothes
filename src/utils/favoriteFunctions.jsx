@@ -1,5 +1,7 @@
 import notification from "antd/es/notification";
 
+
+
 export const toggleFavorite = (favorites, setFavorites, id, image, price, name, brand, setIsFavorite, isFavorite) => {
     const newFavorites = [...favorites];
     const index = newFavorites.findIndex((favorite) => favorite.id === id);

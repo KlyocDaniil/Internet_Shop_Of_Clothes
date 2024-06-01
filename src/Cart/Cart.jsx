@@ -34,10 +34,11 @@ import {Link} from "react-router-dom";
 import {Button} from "antd";
 import useLocalStorage from '../customHooks/useLocalStorage.jsx';
 import moment from "moment";
+import useNotification from "../customHooks/useNotification";
 
 const Cart = () => {
     const { items, setItems, orders, setOrders } = useContext(AppStateContext);
-
+    const { success } = useNotification()
     const promoCodes = ['SPRING20', 'FORYOU50', 'SANYOK70', 'NASTYA90', 'ZHARR50', 'SFEDU30'];
 
     const removeFromCart = (product) => {
@@ -120,11 +121,7 @@ const Cart = () => {
         if (promoCodeFound) {
             const discountAmount = (totalPrice * parseInt(promoCodeFound.slice(5))) / 100;
             setDiscount(discountAmount);
-            notification.success({
-                message: 'Промокод применен',
-                description: `Активирован промокод ${promoCode}! Процент скидки: ${parseInt(promoCodeFound.slice(5))}%`,
-                placement: 'topLeft',
-            });
+            success('Промокод применен', `Активирован промокод ${promoCode} Процент скидки: ${parseInt(promoCodeFound.slice(5))}%`);
         } else {
             setDiscount(0);
         }

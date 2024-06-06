@@ -16,7 +16,7 @@ export const OrderItem = styled.li`
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid black;
   &:last-child {
     border-bottom: none;
   }

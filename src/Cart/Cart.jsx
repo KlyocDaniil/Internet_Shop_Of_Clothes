@@ -85,7 +85,10 @@ const Cart = () => {
 
     const itemsCount = selectedItems.filter(Boolean).length;
 
+
     const handleCheckout = () => {
+        const newCart = cart.filter((item, index) =>!selectedItems[index]);
+        setCart(newCart); // Обновляем состояние cart и localStorage
         const selectedItemsArray = cart.filter((item, index) => selectedItems[index]);
         const ordersWithDate = selectedItemsArray.map((item) => ({
             ...item,
@@ -93,10 +96,7 @@ const Cart = () => {
         }));
         setOrdersState((prevOrders) => [...prevOrders,...ordersWithDate]);
         setOrders([...orders,...ordersWithDate]);
-        setCart(cart.filter((item) =>!selectedItems.includes(item)));
         setSelectedItems(selectedItems.map(() => false));
-        selectedItemsArray.forEach(removeFromCart);
-        setCart(cart);
     };
 
     if (!cart.length) {

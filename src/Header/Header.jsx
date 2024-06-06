@@ -42,7 +42,7 @@ const Header = () => {
                     {personalInfo.city}
                 </Logo>
                 <Space>
-                    <SearchIconButton> <SearchOutlined /> </SearchIconButton>
+                    <SearchIconButton onClick={() => handleNavigation('/search')}> <SearchOutlined /> </SearchIconButton>
                     <UserIconButton onClick={() => handleNavigation('/account')}> <UserOutlined /> </UserIconButton>
                     <FavoritesIconButton onClick={() => handleNavigation('/favorites')}>
                         <HeartOutlined />
